@@ -1,23 +1,27 @@
+import { Link } from "react-router-dom"
 import BrandWidget from "./BrandWidget"
 import CartWidget from "./CartWidget"
 
-const NavBar = () => {
+const NavBar = () => { // renderizado de navbar con los linkeos correspondientes a las categorias
     return(
-        <div class="navbar bg-base-100 shadow-xl">
-            <div class="flex-1">
+        <div className="navbar bg-base-100 shadow-xl">
+            <div className="flex-1">
                 <BrandWidget/>
             </div>
-            <div class="flex-1">
-                <a  class="normal-case text-xl">TIENDA DE BEBIDAS</a>
+            <div className="flex-1">
+                <strong  className="normal-case text-xl">TIENDA DE BEBIDAS</strong>
             </div>
-            <div class="flex-none">
-                <ul class="menu menu-horizontal p-0">
-                    <li><p>Cervezas</p></li>
-                    <li><p>Vinos</p></li>
-                    <li><p>Aperitivos</p></li>
+            <div className="flex-none">
+                <ul className="menu menu-horizontal p-0">
+                    <li><Link to='/category/Cerveza'>Cerveza</Link></li>
+                    <li><Link to='/category/Vino'>Vino</Link></li>
+                    <li><Link to='/category/Aperitivo'>Aperitivo</Link></li>
+                    <li><Link to='/category/BebidaBlanca'>Bebida Blanca</Link></li>
+                    <li><Link to='/category/Champagne'>Champagne</Link></li>
+                    <li><Link to='/category/Whisky'>Whisky</Link></li>
                 </ul>
             </div>
-            <div class="flex-none">
+            <div className="flex-none">
                 <CartWidget/>
             </div>
         </div>
