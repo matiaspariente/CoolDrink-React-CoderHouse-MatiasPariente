@@ -11,17 +11,17 @@ const ItemDetailContainer = () => {
   
     useEffect(() => { // hook de montaje y al modificarse ProductID
       (async () => {
-        const productDetail = await getProductDetail()
+        const productDetail = await getProductDetail(productID)
         setProducts(productDetail)
         setLoading( false )
       })()
   
     }, [productID])
 
-    const getProductDetail = () =>{
+    const getProductDetail = (pid) =>{
       return new Promise( (res) => {
         setTimeout(()=>{
-          res(productsData.find(r=> r.id == productID)) // Se busca el producto con el ID correspondiente
+          res(productsData.find(r=> r.id === parseInt(pid))) // Se busca el producto con el ID correspondiente
         },3000)
       })
     }

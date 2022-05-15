@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom"
+
 const CartWidget = () => { // Funcion que retorna imagen del carrito
     return(
-        <div class="btn btn-ghost">
-            <div class="w-7">
-                <img src="../img/CartWidget.png" alt="CartWidget"/>
+        <div className="btn btn-ghost">
+            <div className="w-7">
+                <Link to='/carrito/'>  
+                    <img src="../img/CartWidget.png" alt="CartWidget"/>
+                </Link>    
             </div>
         </div>
     )
