@@ -6,7 +6,18 @@ const Carts = () => {
     const { carts } = useContext(CartContext)
 
     return (
-        <div>Carrito: {carts} </div>
+        <div>
+            <table className="table table-compact m-20">
+                <thead>
+                    <th>Title</th><th>Cantidad</th>
+                </thead>
+                {carts.map(carts => 
+                    <tbody>
+                        <td>{carts.item}</td><td>{carts.quantity}</td>
+                    </tbody>
+                )} 
+            </table>
+        </div>
     )
 }
 
