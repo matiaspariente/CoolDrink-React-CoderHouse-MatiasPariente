@@ -12,7 +12,7 @@ const ItemDetail = ({item}) => { // funcion que retorna una card con el detalle 
             <h2 className="card-title">{item.title}</h2>
             <p>${item.price}</p>
             <p>{item.detail}</p>
-            <button onClick={() => {addItem(item.title,1)}} className="btn">Agregar a Carrito</button>
+            <button onClick={() => {addItem(item,1)}} className="btn">Agregar a Carrito</button>
         </div>
     </div>
     )   

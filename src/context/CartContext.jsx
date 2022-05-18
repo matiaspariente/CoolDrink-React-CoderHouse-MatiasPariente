@@ -12,21 +12,29 @@ const CartProvider = ({children}) => {
 
     const [carts, setCarts] = useState([])
 
-    const addItem = (itemTitle, quantity) => {
-        let items = carts
-        const busqueda = items.findIndex(item => item.item === itemTitle); // se verifica si ya existe el producto
-        if (busqueda!==-1) {
-            items[busqueda].quantity += quantity // si existe a traves del indice se agrega la cantidad correspondiente al producto
-        }
-        else{ // si no existe aun se carga como un producto nuevo en la tabla
-            const itemCart = {
-                item: itemTitle,
-                quantity: quantity
-                }
-            items.push(itemCart) // Se agrega al array
-        }
-        setCarts(items) // se setea carts
+    const isInCart = (id) => {
+        return carts.some(item => item.id === id) // devuelve true si encuentra algun componente con dicho id
     }
+
+    const addItem = (item, quantity) => {
+        if (isInCart(item.id)){ // si existe solo le agrega la cantidad correspondiente
+            return setCarts(
+                carts.map(product => product.id === item.id
+                ? {...product, quantity: product.quantity + quantity}
+                : product    
+                )
+            );
+        }
+        setCarts([...carts,{...item, quantity}]) //si no existe se suma un nuevo elemento
+    };
+
+    const clear = () => { // Se vacia carrito
+        setCarts([]);
+    };
+
+    const removeItem = (id) => { // se elimina item por id
+        setCarts(carts.filter(item => item.id !== id));
+    };
 
     const context = {
         carts,

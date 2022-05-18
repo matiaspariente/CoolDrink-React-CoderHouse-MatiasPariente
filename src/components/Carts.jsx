@@ -13,7 +13,7 @@ const Carts = () => {
                 </thead>
                 {carts.map(carts => 
                     <tbody>
-                        <td>{carts.item}</td><td>{carts.quantity}</td>
+                        <td>{carts.title}</td><td>{carts.quantity}</td>
                     </tbody>
                 )} 
             </table>
