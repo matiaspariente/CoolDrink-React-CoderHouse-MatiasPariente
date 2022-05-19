@@ -24,7 +24,7 @@ const ItemDetail = ({item}) => { // funcion que retorna una card con el detalle 
             {countToAdd === 0 ? (
                 <ItemCount onAdd={handleOnAdd}/>
             ) : (
-                <Link to="/carrito/">
+                <Link to="/cart">
                     <button className="btn">Ir al carrito</button>
                 </Link>
             )}

@@ -10,13 +10,13 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <NavBar/>
       <CartProvider>
+        <NavBar/>
         <Routes>
           <Route path='/' element={<ItemListContainer/>}/>
           <Route path='/item/:productID' element={<ItemDetailContainer/>}/>
           <Route path='/category/:categoryID' element={<ItemListContainer/>}/>
-          <Route path='/carrito/' element={<Carts/>}/>
+          <Route path='/cart/' element={<Carts/>}/>
         </Routes>
       </CartProvider>
     </BrowserRouter>

@@ -5,7 +5,10 @@ export const CartContext = createContext({
     addItem: () =>{},
     removeItem: () =>{},
     clear: () =>{},
-    isInCart: () =>{}
+    isInCart: () =>{},
+    totalPrice: () =>{},
+    totalCount: () =>{},
+    substractOneItem: () =>{}
 })
 
 const CartProvider = ({children}) => {
@@ -28,6 +31,17 @@ const CartProvider = ({children}) => {
         setCarts([...carts,{...item, quantity}]) //si no existe se suma un nuevo elemento
     };
 
+    const substractOneItem = (item) => {
+        if (item.quantity > 1){ // si existe solo le agrega la cantidad correspondiente
+            return setCarts(
+                carts.map(product => product.id === item.id
+                ? {...product, quantity: product.quantity - 1}
+                : product    
+                )
+            );
+        }
+    };
+
     const clear = () => { // Se vacia carrito
         setCarts([]);
     };
@@ -36,9 +50,32 @@ const CartProvider = ({children}) => {
         setCarts(carts.filter(item => item.id !== id));
     };
 
+    const totalPrice = () => {
+        return carts.reduce(
+          (total, item) => total + item.quantity * item.price,
+          0
+        );
+      };
+    
+    const totalPriceUnit = () => {
+        return carts.reduce((total, item) => total + item.price, 0);
+      };   
+
+    const totalCount = () => {
+        return carts.reduce((total, item) => total + item.quantity, 0);
+      };
+    
+      
+
     const context = {
         carts,
-        addItem
+        totalPrice,
+        totalPriceUnit,
+        addItem,
+        totalCount,
+        removeItem,
+        clear,
+        substractOneItem
     }
 
     return(
