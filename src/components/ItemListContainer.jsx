@@ -1,5 +1,5 @@
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore"
 import { useEffect, useState } from "react";
-import { products as productsData } from "../data/products";
 import { useParams } from "react-router-dom"
 import ItemList from "./ItemList";
 
@@ -8,25 +8,39 @@ const ItemListContainer = () => {
     const {categoryID} = useParams()
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState( true )
-  
-    useEffect(() => { // hook para cambio o eleccion de categoria
-      (async () => {
-        const categoryProducts = await getCategory(categoryID)
-        setProducts(categoryProducts)
-        setLoading( false )
-        } 
-      )()
-  
+    
+    useEffect(() => {
+      categoryID ? getCategory(categoryID) : getItems() //si el hook es por category id solo se trae productos por categoria caso contrario listado completo
     }, [categoryID])
+    
+    const getCategory = async (id) => {
+      const db = getFirestore()
+      const itemsCollection = collection(db, 'items')
+      const q = query( itemsCollection, where( 'category', '==', id ) )
 
-    const getCategory = (id) =>{
-      return new Promise( (res) => {
-        setLoading( true )
-        setTimeout(()=>{
-          res(id ? productsData.filter(r=> r.category === id ): productsData) // se filtran los productos por la categoria correspondiente
-        },3000)
+
+    
+      const snapshot = await getDocs( q )
+
+      if (snapshot.size > 0) {
+        const itemsData = snapshot.docs.map( d => ({'id': d.id, ...d.data()}) )
+        setProducts(itemsData)
+        setLoading( false )
+      }
+    }
+    
+    const getItems = () => {
+      const db = getFirestore()
+      const itemsCollection = collection(db, 'items')
+      getDocs( itemsCollection ).then( snapshot => {
+        if (snapshot.size > 0) {
+          const itemsData = snapshot.docs.map( d => ({'id': d.id, ...d.data()}) )
+          setProducts(itemsData)
+          setLoading( false ) 
+        }
       })
-    }    
+    }
+
 
     return( // se pone en estado de carga hasta cumplir la promesa mostrando animacion
         <div>

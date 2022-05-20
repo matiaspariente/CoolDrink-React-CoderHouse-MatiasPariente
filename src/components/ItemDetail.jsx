@@ -14,6 +14,8 @@ const ItemDetail = ({item}) => { // funcion que retorna una card con el detalle 
         addItem(item,count);
     }
 
+    console.log(item)
+
     return (
         <div className="m-20 card-normal border-2 rounded-md w-100 bg-base-100 shadow-xl flex justify-center">
             <figure><img src={item.pictureUrl} alt={item.title} /></figure>

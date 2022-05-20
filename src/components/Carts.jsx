@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState} from "react";
+import { useContext} from "react";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom"
 
@@ -6,22 +6,9 @@ import { Link } from "react-router-dom"
 const Carts = () => {
 
     const { carts , totalPrice, totalCount, totalPriceUnit, removeItem , clear , addItem, substractOneItem } = useContext(CartContext)
-    const [loading, setLoading] = useState( true )
-
-    useEffect(() => { //hook de loading
-        setTimeout(()=>{  
-                setLoading( false )
-        },3000)
-        }, [])
 
     return (
-
         <div>
-          {loading ? // animacion de carga
-            <div className="flex justify-center m-20 h-20">
-              <img src="../img/logoAnimado.gif" alt="Animacion Carga" />
-            </div>
-          :
             <div className="overflow-x-auto w-full p-20">
                 <div className="font-bold text-6xl text-center mb-20">
                     <h1>CARRITO</h1>
@@ -103,7 +90,6 @@ const Carts = () => {
                     </>        
                 )}
             </div>
-        }
         </div>      
     )
 }
