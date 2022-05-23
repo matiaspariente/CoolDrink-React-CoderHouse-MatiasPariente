@@ -1,47 +1,92 @@
 import React from 'react'
+import { useState , useEffect} from "react";
 
 const CartForm = () => {
+
+    const [datos, setDatos] = useState({
+        nombre: '',
+        apellido: '',
+        telefono:'',
+        email:'',
+        emailConf:''
+    })
+
+    const [mailConf, setMailConf] = useState(false);
+
+    useEffect(()=> {
+        if (datos.email === datos.emailConf && datos.email !== ''){
+            setMailConf(true)
+        }else{
+            setMailConf(false)
+        }   
+      }, [datos])
+
+    const handleInputChange = (event) => {
+        setDatos({
+            ...datos,
+            [event.target.name] : event.target.value
+        })
+    }
+
+    const enviarDatos = (event) => {
+        event.preventDefault()
+        console.log('enviando datos...' + datos.nombre + ' ' + datos.apellido + ' ' + datos.telefono + ' ' + datos.email)
+    }
+
   return (
-    <div class="w-full max-w-lg mt-10">
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                Nompre
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nombre" type="text" placeholder="Nombre"/>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                Apellido
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="apellido" type="text" placeholder="Apellido"/>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                Telefono
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="telefono" type="number" placeholder="Username"/>
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                E-mail
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="e-mail" type="text" placeholder="E-Mail"/>
-            </div>
-            <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                Confirmar E-mail
-                </label>
-                <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="e-mailConf" type="password" placeholder="Confirmación E-Mail"/>
-                <p class="text-red-500 text-xs italic">Please choose a password.</p>
-            </div>
-            <div class="flex items-center">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                Finalizar Compra
-                </button>
-            </div>
-        </form>
-    </div>
+    <>  
+        <div className="w-full max-w-3xl mt-20">
+            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={enviarDatos}>
+                <h1 className="block text-gray-700 text-xl font-bold mb-2 text-center">Ingrese los datos de su compra:</h1>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                        Nombre
+                    </label>
+                    <input type="text" placeholder="Nombre" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={handleInputChange} name="nombre"></input>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                        Apellido
+                    </label>
+                    <input type="text" placeholder="Apellido" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={handleInputChange} name="apellido"></input>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                        Telefono
+                    </label>
+                    <input type="number" placeholder="Telefono" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={handleInputChange} name="telefono"></input>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                        E-Mail
+                    </label>
+                    <input type="text" placeholder="E-Mail" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={handleInputChange} name="email"></input>
+                </div>
+                {mailConf ?
+                    <> 
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2">
+                            Confirmar E-Mail
+                        </label>
+                        <input type="text" placeholder="Confirmar E-Mail" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={handleInputChange} name="emailConf"></input>
+                    </div>
+                    <button type="submit" className="btn">Finalizar Compra</button>
+                    </>
+                :
+                    <> 
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            Confirmar E-Mail
+                        </label>
+                        <input type="text" placeholder="Confirmar E-Mail" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={handleInputChange} name="emailConf"></input>
+                        <p className="text-red-500 text-xs italic">E-Mail no coincide.</p>
+                    </div>
+                    <button type="submit" className="btn" disabled>Finalizar Compra</button>
+                    </>
+                }
+            </form>
+        </div>
+    </>
   )
 }
 
