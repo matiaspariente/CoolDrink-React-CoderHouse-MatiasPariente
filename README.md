@@ -6,7 +6,7 @@
 
 * **Comisión:** 31860
 
-* **Web con Vercel:** cooldrink.vercel.app
+* **Web con Vercel:** https://cooldrink.vercel.app/
 
 ## Descripción
 
