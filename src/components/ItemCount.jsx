@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ItemCount = ({ onAdd }) => {
+const ItemCount = ({ onAdd }) => { // componente de cuenta de cantidad de productos, agregar y sustraer cantidad.
 
     const [count, setCount] = useState(1);
 
@@ -15,7 +15,7 @@ const ItemCount = ({ onAdd }) => {
     };
 
 
-    return (
+    return ( 
         <>
             <div>
                 <button onClick={countSubstract} className="btn m-2">-</button>

@@ -3,18 +3,18 @@ import { Link } from "react-router-dom"
 import { CartContext } from "../context/CartContext";
 import ItemCount from "./ItemCount";
 
-const ItemDetail = ({item}) => { // funcion que retorna una card con el detalle de un producto
+const ItemDetail = ({item}) => { // componente que retorna una card con el detalle de un producto
 
     const [countToAdd,setCountToAdd] = useState(0)
 
     const { addItem } = useContext(CartContext);
 
-    const handleOnAdd = (count) => {
+    const handleOnAdd = (count) => { 
         setCountToAdd(count);
         addItem(item,count);
     }
 
-    return (
+    return ( //render de detalle de producto con condicional por cantidad seleccionada
         <div className="m-20 card-normal border-2 rounded-md w-100 bg-base-100 shadow-xl flex justify-center">
             <figure><img src={item.pictureUrl} alt={item.title} /></figure>
         <div className="card-body">

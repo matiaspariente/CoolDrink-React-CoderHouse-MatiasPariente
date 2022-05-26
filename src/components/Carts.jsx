@@ -5,12 +5,11 @@ import CartForm from "./CartForm";
 import { Link } from "react-router-dom"
 
 
+const Carts = () => { //Componente de carrito
 
-const Carts = () => {
+    const { carts } = useContext(CartContext) 
 
-    const { carts } = useContext(CartContext)
-
-    return (
+    return ( // render de carrito completo, con condicion de carrito vacio
         <div>
             <div className="overflow-x-auto w-full p-20">
                 <div className="font-bold text-6xl text-center mb-20">

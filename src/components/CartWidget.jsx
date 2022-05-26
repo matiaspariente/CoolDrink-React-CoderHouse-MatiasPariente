@@ -2,11 +2,11 @@ import { Link } from "react-router-dom"
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
-const CartWidget = () => { // Funcion que retorna imagen del carrito
+const CartWidget = () => { // componente contenedor de imagen del carrito
 
     const { totalCount } = useContext(CartContext);
 
-    return(
+    return( //render de widget de carrito, condicion de mostrarse cuando hay produgos en carrito
         <>
         {totalCount() > 0 ? (
         <div>

@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { CartContext }  from "../context/CartContext";
 
 
-const CartList = () => {
+const CartList = () => { // componente de listado de compra
 
-    const { carts , totalPrice, totalCount, totalPriceUnit, removeItem , clear , addItem, substractOneItem } = useContext(CartContext)
+    const { carts , totalPrice, totalCount, totalPriceUnit, removeItem , clear , addItem, substractOneItem } = useContext(CartContext) // se trae el contexto del carrito
 
-  return (
+  return (// render del listado de carrito
     <> 
     <table className="table w-full">
                     <thead className="text-center">

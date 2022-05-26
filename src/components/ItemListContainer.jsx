@@ -12,7 +12,7 @@ const ItemListContainer = () => {
     
     useEffect(() => {
       setExist(true)
-      categoryID ? getCategory(categoryID) : getItems() //si el hook es por category id solo se trae productos por categoria caso contrario listado completo
+      categoryID ? getCategory(categoryID) : getItems() //hook de cambio de categoria
     }, [categoryID])
     
     const getCategory = async (id) => {
@@ -47,7 +47,7 @@ const ItemListContainer = () => {
     }
 
 
-    return( // se pone en estado de carga hasta cumplir la promesa mostrando animacion
+    return( // render de productos filtrados por categorias, con condicion de carta y de categoria existente
         <div>
           {loading ?
             <div className="flex justify-center m-20 h-20">
